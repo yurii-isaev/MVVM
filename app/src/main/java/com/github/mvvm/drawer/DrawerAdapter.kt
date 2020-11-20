@@ -7,13 +7,14 @@ import android.widget.AdapterView
 import androidx.recyclerview.widget.RecyclerView
 
 
-class DrawerAdapter(items: List<DrawerItem>) : RecyclerView.Adapter<DrawerAdapter.ViewHolder>() {
+class DrawerAdapter : RecyclerView.Adapter<DrawerAdapter.ViewHolder> {
     private val items: List<DrawerItem>
     private val viewTypes: MutableMap<Class<out DrawerItem?>, Int>
     private val holderFactories: SparseArray<DrawerItem>
     private val listener: AdapterView.OnItemClickListener? = null
 
-    init {
+    constructor(items: List<DrawerItem>) : super() {
+        this.items = emptyList()
         viewTypes = HashMap<Class<out DrawerItem?>, Int>()
         holderFactories = SparseArray<DrawerItem>()
         processViewTypes()
@@ -49,7 +50,8 @@ class DrawerAdapter(items: List<DrawerItem>) : RecyclerView.Adapter<DrawerAdapte
     }
 
 
-    abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView), View.OnClickListener {
+    abstract class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView),
+        View.OnClickListener {
         var drawerAdapter: DrawerAdapter? = null
 
         override fun onClick(v: View) {}
